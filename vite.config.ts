@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { resolve } from 'path'
 import { execSync } from 'child_process'
+import dts from 'vite-plugin-dts'
 
 function tokenWatcher() {
   return {
@@ -24,15 +25,23 @@ function tokenWatcher() {
 }
 
 export default defineConfig({
-  plugins: [react(), tokenWatcher()],
+  plugins: [
+    react(),
+    tokenWatcher(),
+    dts({
+      include:      ['src'],
+      exclude:      ['src/app/**', 'src/tokens/buildCss.ts', 'src/main.tsx'],
+      tsconfigPath: './tsconfig.app.json',
+    }),
+  ],
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/index.ts'),
-      formats: ['es'],
-      fileName: 'judi-design-system',
+      entry:    resolve(__dirname, 'src/index.ts'),
+      formats:  ['es'],
+      fileName: 'index',
     },
     rollupOptions: {
-      external: ['react', 'react-dom'],
+      external: ['react', 'react/jsx-runtime', 'react-dom'],
     },
   },
 })

@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import { Icon } from '../../ui/Icon'
 import { ChevronRightIcon } from '../../ui/Icon'
 
@@ -51,8 +50,8 @@ export function Breadcrumb({ items, className = '' }: BreadcrumbProps) {
                 </span>
               ) : (
                 // Ancestor — hoverable with underline
-                <Link
-                  to={item.href ?? '/'}
+                <a
+                  href={item.href ?? '/'}
                   style={{
                     fontSize:        'var(--breadcrumb-label-size)',
                     lineHeight:      'var(--breadcrumb-label-line-height)',
@@ -64,7 +63,7 @@ export function Breadcrumb({ items, className = '' }: BreadcrumbProps) {
                   onMouseLeave={e => (e.currentTarget.style.textDecoration = 'none')}
                 >
                   {item.label}
-                </Link>
+                </a>
               )}
             </li>
           )

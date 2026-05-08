@@ -1,9 +1,5 @@
 import { writeFileSync } from 'fs'
-import { resolve, dirname } from 'path'
-import { fileURLToPath } from 'url'
 import { themes } from './semantic/index.js'
-
-const __dirname = dirname(fileURLToPath(import.meta.url))
 
 function generateThemeBlock(themeName: string, tokens: Record<string, string>): string {
   const vars = Object.entries(tokens)
@@ -16,7 +12,7 @@ const css = Object.entries(themes)
   .map(([themeName, tokens]) => generateThemeBlock(themeName, tokens))
   .join('\n\n')
 
-const outputPath = resolve(__dirname, '../styles/themes.css')
+const outputPath = new URL('../styles/themes.css', import.meta.url)
 writeFileSync(outputPath, css + '\n')
 
 console.log('themes.css generated')

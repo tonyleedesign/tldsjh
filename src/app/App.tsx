@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { HashRouter } from 'react-router-dom'
 import { Button } from '../components/ui/Button'
 import { AddIcon, ArrowRightIcon, DeleteIcon, StarFilledIcon } from '../components/ui/Icon'
 import { AppLayout } from '../components/layout/AppLayout'
@@ -487,11 +486,7 @@ function DocContent() {
 // ─── App ──────────────────────────────────────────────────────────────────────
 
 function App() {
-  return (
-    <HashRouter>
-      <DocContent />
-    </HashRouter>
-  )
+  
 }
 
 export default App

@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react'
-import { Link } from 'react-router-dom'
 import { Button } from '../../ui/Button'
 import { Icon } from '../../ui/Icon'
 import { MenuGridIcon } from '../../ui/Icon/icons/menu-grid'
@@ -17,7 +16,7 @@ export interface GlobalHeaderProps {
 
   // ── Shared ──────────────────────────────────────────────────────────────────
   /** Full logo shown on sm+ screens */
-  logoSrc: string
+  logoSrc?: string
   /** Icon-only logo shown on mobile */
   logoIconSrc?: string
   /** Alt text for the logo — defaults to "Judi" */
@@ -67,13 +66,15 @@ export function GlobalHeader({
   className        = '',
 }: GlobalHeaderProps) {
 
-  const logo = (
-    <Link to={logoHref} className="flex items-center h-(--space-24)">
-      <img
-        src={logoSrc}
-        alt={logoAlt}
-        className={`h-full w-auto ${logoIconSrc ? 'hidden sm:block' : ''}`}
-      />
+  const logo = (logoSrc || logoIconSrc) ? (
+    <a href={logoHref} className="flex items-center h-(--space-24)">
+      {logoSrc && (
+        <img
+          src={logoSrc}
+          alt={logoAlt}
+          className={`h-full w-auto ${logoIconSrc ? 'hidden sm:block' : ''}`}
+        />
+      )}
       {logoIconSrc && (
         <img
           src={logoIconSrc}
@@ -81,8 +82,8 @@ export function GlobalHeader({
           className="h-full w-auto block sm:hidden"
         />
       )}
-    </Link>
-  )
+    </a>
+  ) : null
 
   return (
     <header

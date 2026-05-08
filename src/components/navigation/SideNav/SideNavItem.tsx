@@ -1,11 +1,10 @@
 import type { ReactNode } from 'react'
-import { Link } from 'react-router-dom'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 export interface SideNavItemProps {
   label: string
-  /** Provide href to navigate via React Router <Link>. Omit to use onClick state-based navigation. */
+  /** Provide href for anchor-based navigation. Omit to use onClick state-based navigation. */
   href?: string
   /** Used when href is omitted — switches the active section without routing */
   onClick?: () => void
@@ -49,9 +48,9 @@ export function SideNavItem({
 
   if (href) {
     return (
-      <Link to={href} className={sharedClass} style={itemTypography}>
+      <a href={href} className={sharedClass} style={itemTypography}>
         {content}
-      </Link>
+      </a>
     )
   }
 

@@ -14,7 +14,7 @@ export interface AppLayoutProps {
 
   // ── Shared header props ──────────────────────────────────────────────────────
   /** Full logo shown on sm+ screens */
-  logoSrc: string
+  logoSrc?: string
   /** Icon-only logo shown on mobile */
   logoIconSrc?: string
   /** Alt text for the logo — defaults to "Judi" */

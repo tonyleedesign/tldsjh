@@ -1,28 +1,42 @@
 {
-  "name": "judi-design-system",
+  "name": "@make-kits/jh-ds",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/src/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/src/index.d.ts"
+    },
+    "./style.css": "./src/styles/themes.css"
+  },
+  "files": [
+    "dist",
+    "src/components",
+    "src/assets",
+    "src/styles/themes.css"
+  ],
   "scripts": {
     "generate:tokens": "tsx src/tokens/buildCss.ts",
-    "watch:tokens": "tsx watch src/tokens/buildCss.ts",
-    "predev": "tsx src/tokens/buildCss.ts",
+    "watch:tokens": "tsx --watch src/tokens/buildCss.ts",
+    "dev": "concurrently \"vite\" \"tsx --watch src/tokens/buildCss.ts\"",
+    "build": "vite build",
     "prebuild": "tsx src/tokens/buildCss.ts",
-    "dev": "vite",
-    "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
-  "dependencies": {
-    "@tailwindcss/postcss": "^4.2.4",
-    "lucide-react": "^1.14.0",
-    "postcss": "^8.5.14",
-    "react": "^19.2.5",
-    "react-dom": "^19.2.5",
-    "react-router-dom": "^7.15.0",
-    "tailwindcss": "^4.2.4"
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
   },
+  "dependencies": {},
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.2.4",
+    "postcss": "^8.5.14",
+    "tailwindcss": "^4.2.4",
     "@eslint/js": "^10.0.1",
     "@types/node": "^24.12.2",
     "@types/react": "^19.2.14",
@@ -33,9 +47,12 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.5.0",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
     "tsx": "^4.21.0",
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.58.2",
-    "vite": "^8.0.10"
+    "vite": "^8.0.10",
+    "vite-plugin-dts": "^5.0.0"
   }
 }
