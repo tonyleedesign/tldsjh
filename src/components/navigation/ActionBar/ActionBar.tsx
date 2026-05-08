@@ -17,11 +17,6 @@ export interface ActionBarProps {
    */
   onBackClick?: () => void
   /**
-   * Metadata items rendered inline to the right of the title.
-   * Use <MetadataItem> components here.
-   */
-  titleMeta?: ReactNode
-  /**
    * Optional second row of content beneath the title row.
    * Hidden when not provided.
    */
@@ -40,7 +35,6 @@ export function ActionBar({
   breadcrumbs,
   title,
   onBackClick,
-  titleMeta,
   secondaryContent,
   actions,
   className = '',
@@ -49,7 +43,7 @@ export function ActionBar({
 
   return (
     <section
-      className={`flex flex-col px-(--space-40) py-(--space-16) bg-(--bg-surface-base) ${className}`}
+      className={`flex flex-col px-(--layout-4) py-(--inset-6) bg-(--bg-surface-base) ${className}`}
       style={{ borderBottom: 'var(--space-1) solid var(--border-surface-base)' }}
     >
       {/* ── Row 1: Breadcrumbs ── */}
@@ -57,12 +51,12 @@ export function ActionBar({
 
       {/* ── Row 2: Title + actions (only when there's something to show) ── */}
       {(hasTitleRow || actions) && (
-        <div className="flex items-start justify-between gap-(--space-16) mt-(--space-20)">
+        <div className="flex items-start justify-between gap-(--inline-4) mt-(--space-20)">
 
           {/* Left — title + optional secondary row */}
-          <div className="flex flex-col gap-(--space-8)">
+          <div className="flex flex-col gap-(--stack-2)">
             {hasTitleRow && (
-              <div className="flex items-center gap-(--space-12)">
+              <div className="flex items-center gap-(--inline-3)">
                 {onBackClick && (
                   <Button
                     variant="secondary"
@@ -87,16 +81,11 @@ export function ActionBar({
                   </h1>
                 )}
 
-                {titleMeta && (
-                  <div className="flex items-center gap-(--space-12)">
-                    {titleMeta}
-                  </div>
-                )}
               </div>
             )}
 
             {secondaryContent && (
-              <div className="flex items-center gap-(--space-12)">
+              <div className="flex items-center gap-(--inline-3)">
                 {secondaryContent}
               </div>
             )}

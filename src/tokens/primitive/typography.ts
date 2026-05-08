@@ -1,6 +1,7 @@
 export const fontFamily = {
-  'source-sans-3': '"Source Sans 3", sans-serif',
-  'fira-code':     '"Fira Code", monospace',
+  'source-sans-3':   '"Source Sans 3", sans-serif',
+  'inter':           '"Inter", sans-serif',
+  'fira-code':       '"Fira Code", monospace',
 } as const
 
 export const fontSize = {

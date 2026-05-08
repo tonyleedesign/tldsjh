@@ -18,21 +18,10 @@ export interface SideNavItemProps {
 
 // ─── Shared styles ────────────────────────────────────────────────────────────
 
-const itemStyle: React.CSSProperties = {
-  paddingTop:     'var(--space-8)',
-  paddingBottom:  'var(--space-8)',
-  paddingLeft:    'var(--space-6)',
-  paddingRight:   'var(--space-6)',
-  fontSize:       'var(--menu-item-lg-size)',
-  lineHeight:     'var(--menu-item-lg-line-height)',
-  fontWeight:     'var(--menu-item-lg-weight)',
-  textDecoration: 'none',
-  borderRadius:   'var(--radius-s)',
-  cursor:         'pointer',
-  border:         'none',
-  background:     'none',
-  width:          '100%',
-  textAlign:      'left',
+const itemTypography: React.CSSProperties = {
+  fontSize:   'var(--menu-item-lg-size)',
+  lineHeight: 'var(--menu-item-lg-line-height)',
+  fontWeight: 'var(--menu-item-lg-weight)',
 }
 
 // ─── Component ────────────────────────────────────────────────────────────────
@@ -49,7 +38,7 @@ export function SideNavItem({
     ? 'bg-(--bg-navigation-item-primary-active) text-(--text-navigation-item-primary-active)'
     : 'bg-(--bg-navigation-item-primary-idle) hover:bg-(--bg-navigation-item-primary-hover) text-(--text-navigation-item-primary-idle) hover:text-(--text-navigation-item-primary-hover)'
 
-  const sharedClass = `flex items-center justify-between w-full ${stateClasses} ${className}`
+  const sharedClass = `flex items-center justify-between w-full py-(--inset-3) px-(--inset-2) no-underline rounded-(--radius-sm) cursor-pointer border-0 bg-transparent text-left ${stateClasses} ${className}`
 
   const content = (
     <>
@@ -60,14 +49,14 @@ export function SideNavItem({
 
   if (href) {
     return (
-      <Link to={href} className={sharedClass} style={itemStyle}>
+      <Link to={href} className={sharedClass} style={itemTypography}>
         {content}
       </Link>
     )
   }
 
   return (
-    <button onClick={onClick} className={sharedClass} style={itemStyle}>
+    <button onClick={onClick} className={sharedClass} style={itemTypography}>
       {content}
     </button>
   )

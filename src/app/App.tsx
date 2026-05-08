@@ -29,7 +29,7 @@ function TypographySection() {
   ]
 
   return (
-    <div className="p-(--space-32) min-h-full bg-(--bg-surface-subtle)">
+    <div className="min-h-full">
       <h2
         className="mb-(--space-24) text-(--text-surface-base)"
         style={{ fontSize: 'var(--heading-md-size)', lineHeight: 'var(--heading-md-line-height)', fontWeight: 'var(--heading-md-weight)' }}
@@ -144,7 +144,7 @@ function ColorsSection() {
   ]
 
   return (
-    <div className="p-(--space-32) min-h-full bg-(--bg-surface-subtle)">
+    <div className="min-h-full">
       <h2
         className="mb-(--space-24) text-(--text-surface-base)"
         style={{ fontSize: 'var(--heading-md-size)', lineHeight: 'var(--heading-md-line-height)', fontWeight: 'var(--heading-md-weight)' }}
@@ -164,17 +164,15 @@ function ColorsSection() {
               {swatches.map(({ label: swatchLabel, token, border }) => (
                 <div key={swatchLabel} className="flex flex-col items-center gap-(--space-6)">
                   <div
+                    className="w-12 h-12 rounded-(--radius-sm)"
                     style={{
-                      width:            '48px',
-                      height:           '48px',
-                      borderRadius:     'var(--radius-sm)',
-                      background:       `var(${token})`,
-                      border:           border ? '1px solid var(--border-surface-base)' : undefined,
+                      background: `var(${token})`,
+                      border:     border ? '1px solid var(--border-surface-base)' : undefined,
                     }}
                   />
                   <span
-                    className="text-(--text-surface-subtle) text-center"
-                    style={{ fontSize: 'var(--label-sm-size)', maxWidth: '64px' }}
+                    className="text-(--text-surface-subtle) text-center max-w-16"
+                    style={{ fontSize: 'var(--label-sm-size)' }}
                   >
                     {swatchLabel}
                   </span>
@@ -211,7 +209,7 @@ function SpacingSection() {
   ]
 
   return (
-    <div className="p-(--space-32) min-h-full bg-(--bg-surface-subtle)">
+    <div className="min-h-full">
       <h2
         className="mb-(--space-24) text-(--text-surface-base)"
         style={{ fontSize: 'var(--heading-md-size)', lineHeight: 'var(--heading-md-line-height)', fontWeight: 'var(--heading-md-weight)' }}
@@ -222,19 +220,14 @@ function SpacingSection() {
         {tokens.map(({ label, token }) => (
           <div key={token} className="flex items-center gap-(--space-16)">
             <span
-              className="shrink-0 text-(--text-surface-subtle)"
-              style={{ fontSize: 'var(--label-md-size)', fontWeight: 'var(--label-md-weight)', width: '72px' }}
+              className="shrink-0 w-[72px] text-(--text-surface-subtle)"
+              style={{ fontSize: 'var(--label-md-size)', fontWeight: 'var(--label-md-weight)' }}
             >
               {label}
             </span>
             <div
-              className="bg-(--bg-action-primary-idle)"
-              style={{
-                width:        `var(${token})`,
-                height:       '16px',
-                minWidth:     '2px',
-                borderRadius: 'var(--radius-xs)',
-              }}
+              className="bg-(--bg-action-primary-idle) h-4 min-w-[2px] rounded-(--radius-xs)"
+              style={{ width: `var(${token})` }}
             />
           </div>
         ))}
@@ -263,7 +256,7 @@ function DemoRow({ label, children }: { label: string; children: React.ReactNode
 
 function ButtonSection() {
   return (
-    <div className="p-(--space-32) min-h-full bg-(--bg-surface-subtle)">
+    <div className="min-h-full">
       <h2
         className="mb-(--space-24) text-(--text-surface-base)"
         style={{ fontSize: 'var(--heading-md-size)', lineHeight: 'var(--heading-md-line-height)', fontWeight: 'var(--heading-md-weight)' }}
@@ -357,10 +350,7 @@ function ButtonSection() {
         >
           Inverse
         </h3>
-        <div
-          className="p-(--space-24)"
-          style={{ background: 'var(--bg-surface-inverse)', borderRadius: 'var(--radius-md)' }}
-        >
+        <div className="p-(--space-24) bg-(--bg-surface-inverse) rounded-(--radius-md)">
           <DemoRow label="Default">
             <Button variant="inverse">Label</Button>
             <Button variant="inverse" leftIcon={AddIcon}>Left icon</Button>
@@ -391,7 +381,7 @@ function RadiusSection() {
   ]
 
   return (
-    <div className="p-(--space-32) min-h-full bg-(--bg-surface-subtle)">
+    <div className="min-h-full">
       <h2
         className="mb-(--space-24) text-(--text-surface-base)"
         style={{ fontSize: 'var(--heading-md-size)', lineHeight: 'var(--heading-md-line-height)', fontWeight: 'var(--heading-md-weight)' }}
@@ -402,12 +392,8 @@ function RadiusSection() {
         {tokens.map(({ label, token }) => (
           <div key={token} className="flex flex-col items-center gap-(--space-12)">
             <div
-              className="bg-(--bg-action-primary-idle)"
-              style={{
-                width:        '64px',
-                height:       '64px',
-                borderRadius: `var(${token})`,
-              }}
+              className="bg-(--bg-action-primary-idle) w-16 h-16"
+              style={{ borderRadius: `var(${token})` }}
             />
             <div className="flex flex-col items-center gap-(--space-4)">
               <span
@@ -434,7 +420,7 @@ function RadiusSection() {
 
 function ShellSection() {
   return (
-    <div className="p-(--space-32) min-h-full bg-(--bg-surface-subtle)" />
+    <div className="min-h-full" />
   )
 }
 

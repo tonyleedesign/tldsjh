@@ -38,14 +38,14 @@ export function GlobalHeader({
 }: GlobalHeaderProps) {
   return (
     <header
-      className={`flex items-center justify-between px-(--space-16) py-(--space-10) ${className}`}
+      className={`flex items-center justify-between px-(--inset-6) py-(--inset-4) ${className}`}
       style={{
         background:   'var(--bg-navigation-bar)',
         borderBottom: 'var(--space-1) solid var(--border-surface-base)',
       }}
     >
       {/* ── Left ── */}
-      <div className="flex items-center gap-(--space-16)">
+      <div className="flex items-center gap-(--inline-4)">
         <Button
           variant="inverse"
           iconOnly
@@ -76,7 +76,7 @@ export function GlobalHeader({
       </div>
 
       {/* ── Right ── */}
-      <div className="flex items-center gap-(--space-16)">
+      <div className="flex items-center gap-(--inline-4)">
         {headerActions}
         <Button
           variant="inverse"

@@ -32,10 +32,7 @@ export function SideNav({ isOpen, onToggle, children, className = '' }: SideNavP
     >
       {isOpen ? (
         // ── Expanded ──────────────────────────────────────────────────────────
-        <div
-          className="flex flex-col"
-          style={{ padding: 'var(--space-24)' }}
-        >
+        <div className="flex flex-col p-(--inset-7)">
           {/* X close — right-aligned */}
           <div className="flex justify-end">
             <Button
@@ -50,21 +47,14 @@ export function SideNav({ isOpen, onToggle, children, className = '' }: SideNavP
 
           {/* Nav items */}
           {children && (
-            <div className="flex flex-col mt-(--space-24)">
+            <div className="flex flex-col mt-(--stack-5)">
               {children}
             </div>
           )}
         </div>
       ) : (
         // ── Collapsed ─────────────────────────────────────────────────────────
-        <div
-          className="flex justify-center"
-          style={{
-            paddingTop:   'var(--space-24)',
-            paddingLeft:  'var(--space-8)',
-            paddingRight: 'var(--space-8)',
-          }}
-        >
+        <div className="flex justify-center pt-(--inset-7) px-(--inset-3)">
           <Button
             variant="tertiary"
             iconOnly

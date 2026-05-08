@@ -29,8 +29,6 @@ export interface AppLayoutProps {
   title?: string
   /** When provided, renders a ← Back button to the left of the title */
   onBackClick?: () => void
-  /** Metadata rendered inline to the right of the title */
-  titleMeta?: ReactNode
   /** Optional second row of content beneath the title row */
   secondaryContent?: ReactNode
   /** Action buttons for the far right of the ActionBar */
@@ -61,7 +59,6 @@ export function AppLayout({
   breadcrumbs,
   title,
   onBackClick,
-  titleMeta,
   secondaryContent,
   actions,
   // SideNav
@@ -90,7 +87,6 @@ export function AppLayout({
           breadcrumbs={breadcrumbs}
           title={title}
           onBackClick={onBackClick}
-          titleMeta={titleMeta}
           secondaryContent={secondaryContent}
           actions={actions}
         />
@@ -105,7 +101,7 @@ export function AppLayout({
           {sideNavContent}
         </SideNav>
 
-        <main className="flex-1 overflow-auto">
+        <main className="flex-1 overflow-auto bg-(--bg-surface-subtle) p-(--layout-4)">
           {children}
         </main>
       </div>

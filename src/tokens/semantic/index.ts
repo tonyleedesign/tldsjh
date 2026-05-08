@@ -7,10 +7,12 @@ export const themes = {
     ...colorThemes.minerva,
     ...spacingThemes.minerva,
     ...typographyThemes.minerva,
+    'root-font-size': '16px',
   },
   evolution: {
     ...colorThemes.evolution,
     ...spacingThemes.evolution,
     ...typographyThemes.evolution,
+    'root-font-size': '14px',
   },
 }

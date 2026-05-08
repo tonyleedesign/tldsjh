@@ -15,6 +15,7 @@ dist-ssr
 # Project-specific
 .claude
 docs
+CLAUDE.md
 
 # Editor directories and files
 .vscode/*

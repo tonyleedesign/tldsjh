@@ -75,6 +75,9 @@ const minervaTypography = {
 
 const evolutionTypography = {
   ...minervaTypography,
+
+  // ─── Fonts ────────────────────────────────────────────────────────────────
+  'font-base': fontFamily['inter'],
 } as const
 
 export const typographyThemes = {
