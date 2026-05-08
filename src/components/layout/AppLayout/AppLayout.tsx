@@ -8,19 +8,37 @@ import type { BreadcrumbItem } from '../../navigation/Breadcrumb'
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 export interface AppLayoutProps {
-  // ── GlobalHeader ────────────────────────────────────────────────────────────
-  /** Active module name shown in the header */
+  // ── Layout variant ──────────────────────────────────────────────────────────
+  /** Which header to render — defaults to "minerva" */
+  variant?: 'minerva' | 'evolution'
+
+  // ── Shared header props ──────────────────────────────────────────────────────
+  /** Full logo shown on sm+ screens */
+  logoSrc: string
+  /** Icon-only logo shown on mobile */
+  logoIconSrc?: string
+  /** Alt text for the logo — defaults to "Judi" */
+  logoAlt?: string
+  /** Where the logo links — defaults to "/" */
+  logoHref?: string
+  /** Module or app name shown next to the logo */
   appName?: string
-  /** Called when the menu icon is clicked */
-  onMenuClick?: () => void
-  /** Optional content rendered to the left of the bell icon */
+  /** Optional content rendered before the bell icon — available in both variants */
   headerActions?: ReactNode
   /** Called when the notifications icon is clicked */
   onNotificationsClick?: () => void
-  /** Called when the account button is clicked */
+
+  // ── Minerva-only header props ────────────────────────────────────────────────
+  /** Called when the account button is clicked (Minerva only) */
   onAccountClick?: () => void
-  /** Label for the account button */
+  /** Label for the account button (Minerva only) — defaults to "Account" */
   accountLabel?: string
+
+  // ── Evolution-only header props ──────────────────────────────────────────────
+  /** Called when the AI assistant icon is clicked (Evolution only) */
+  onAiClick?: () => void
+  /** Called when the keyboard shortcuts icon is clicked (Evolution only) */
+  onKeyboardClick?: () => void
 
   // ── ActionBar ───────────────────────────────────────────────────────────────
   /** Breadcrumb trail */
@@ -48,13 +66,21 @@ export interface AppLayoutProps {
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export function AppLayout({
-  // GlobalHeader
+  variant            = 'minerva',
+  // Shared header
+  logoSrc,
+  logoIconSrc,
+  logoAlt,
+  logoHref,
   appName,
-  onMenuClick,
-  headerActions,
   onNotificationsClick,
   onAccountClick,
+  // Minerva-only
+  headerActions,
   accountLabel,
+  // Evolution-only
+  onAiClick,
+  onKeyboardClick,
   // ActionBar
   breadcrumbs,
   title,
@@ -66,45 +92,83 @@ export function AppLayout({
   defaultSideNavOpen = true,
   // Content
   children,
-  className = '',
+  className          = '',
 }: AppLayoutProps) {
   const [sideNavOpen, setSideNavOpen] = useState(defaultSideNavOpen)
+
+  const header = (
+    <GlobalHeader
+      variant={variant}
+      logoSrc={logoSrc}
+      logoIconSrc={logoIconSrc}
+      logoAlt={logoAlt}
+      logoHref={logoHref}
+      appName={appName}
+      onMenuClick={() => setSideNavOpen(prev => !prev)}
+      onNotificationsClick={onNotificationsClick}
+      onAccountClick={onAccountClick}
+      headerActions={headerActions}
+      accountLabel={accountLabel}
+      onAiClick={onAiClick}
+      onKeyboardClick={onKeyboardClick}
+    />
+  )
+
+  const actionBar = (
+    <ActionBar
+      breadcrumbs={breadcrumbs}
+      title={title}
+      onBackClick={onBackClick}
+      secondaryContent={secondaryContent}
+      actions={actions}
+    />
+  )
+
+  const sideNav = (
+    <SideNav
+      isOpen={sideNavOpen}
+      onToggle={() => setSideNavOpen(prev => !prev)}
+    >
+      {sideNavContent}
+    </SideNav>
+  )
 
   return (
     <div className={`flex flex-col h-screen overflow-hidden bg-(--bg-surface-base) ${className}`}>
 
-      {/* ── Sticky header block ── */}
-      <div className="sticky top-0 z-50">
-        <GlobalHeader
-          appName={appName}
-          onMenuClick={onMenuClick}
-          headerActions={headerActions}
-          onNotificationsClick={onNotificationsClick}
-          onAccountClick={onAccountClick}
-          accountLabel={accountLabel}
-        />
-        <ActionBar
-          breadcrumbs={breadcrumbs}
-          title={title}
-          onBackClick={onBackClick}
-          secondaryContent={secondaryContent}
-          actions={actions}
-        />
-      </div>
+      {variant === 'evolution' ? (
 
-      {/* ── Body — SideNav + scrollable content ── */}
-      <div className="flex flex-1 overflow-hidden">
-        <SideNav
-          isOpen={sideNavOpen}
-          onToggle={() => setSideNavOpen(prev => !prev)}
-        >
-          {sideNavContent}
-        </SideNav>
+        // ── Evolution — SideNav spans full height alongside ActionBar + content ──
+        <>
+          <div className="sticky top-0 z-50">{header}</div>
+          <div className="flex flex-1 overflow-hidden">
+            {sideNavOpen && sideNav}
+            <div className="flex flex-col flex-1 overflow-hidden">
+              {actionBar}
+              <main className="flex-1 overflow-auto bg-(--bg-surface-subtle) p-(--layout-4)">
+                {children}
+              </main>
+            </div>
+          </div>
+        </>
 
-        <main className="flex-1 overflow-auto bg-(--bg-surface-subtle) p-(--layout-4)">
-          {children}
-        </main>
-      </div>
+      ) : (
+
+        // ── Minerva — SideNav sits below ActionBar ────────────────────────────────
+        <>
+          <div className="sticky top-0 z-50">
+            {header}
+            {actionBar}
+          </div>
+          <div className="flex flex-1 overflow-hidden">
+            {sideNav}
+            <main className="flex-1 overflow-auto bg-(--bg-surface-subtle) p-(--layout-4)">
+              {children}
+            </main>
+          </div>
+        </>
+
+      )}
 
     </div>
   )

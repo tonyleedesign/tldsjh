@@ -3,98 +3,168 @@ import { Link } from 'react-router-dom'
 import { Button } from '../../ui/Button'
 import { Icon } from '../../ui/Icon'
 import { MenuGridIcon } from '../../ui/Icon/icons/menu-grid'
+import { MenuBarsIcon } from '../../ui/Icon/icons/menu-bars'
 import { BellIcon } from '../../ui/Icon/icons/bell'
 import { ChevronDownIcon } from '../../ui/Icon/icons/chevron-down'
-import judiLogo from '../../../assets/judi-logo.svg'
+import { MessageDotsIcon } from '../../ui/Icon/icons/message-dots'
+import { SettingsIcon } from '../../ui/Icon/icons/settings'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 export interface GlobalHeaderProps {
-  /** Current app or module name shown next to the logo */
+  /** Which header layout to render — defaults to "minerva" */
+  variant?: 'minerva' | 'evolution'
+
+  // ── Shared ──────────────────────────────────────────────────────────────────
+  /** Full logo shown on sm+ screens */
+  logoSrc: string
+  /** Icon-only logo shown on mobile */
+  logoIconSrc?: string
+  /** Alt text for the logo — defaults to "Judi" */
+  logoAlt?: string
+  /** Where the logo links — defaults to "/" */
+  logoHref?: string
+  /** Module or app name */
   appName?: string
-  /** Called when the menu grid icon is clicked */
+  /** Called when the menu icon is clicked */
   onMenuClick?: () => void
-  /** Optional content rendered to the left of the bell icon */
-  headerActions?: ReactNode
   /** Called when the bell notification icon is clicked */
   onNotificationsClick?: () => void
-  /** Called when the account button is clicked */
+  /** Optional content rendered before the bell icon — available in both variants */
+  headerActions?: ReactNode
+
+  // ── Minerva only ────────────────────────────────────────────────────────────
+  /** Called when the account button is clicked (Minerva only) */
   onAccountClick?: () => void
-  /** Label for the account button */
+  /** Label for the account button (Minerva only) — defaults to "Account" */
   accountLabel?: string
+
+  // ── Evolution only ──────────────────────────────────────────────────────────
+  /** Called when the AI assistant icon is clicked (Evolution only) */
+  onAiClick?: () => void
+  /** Called when the keyboard shortcuts icon is clicked (Evolution only) */
+  onKeyboardClick?: () => void
+
   className?: string
 }
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export function GlobalHeader({
+  variant          = 'minerva',
+  logoSrc,
+  logoIconSrc,
+  logoAlt          = 'Judi',
+  logoHref         = '/',
   appName,
   onMenuClick,
-  headerActions,
   onNotificationsClick,
+  headerActions,
   onAccountClick,
-  accountLabel = 'Account',
-  className = '',
+  accountLabel     = 'Account',
+  onAiClick,
+  onKeyboardClick,
+  className        = '',
 }: GlobalHeaderProps) {
+
+  const logo = (
+    <Link to={logoHref} className="flex items-center h-(--space-24)">
+      <img
+        src={logoSrc}
+        alt={logoAlt}
+        className={`h-full w-auto ${logoIconSrc ? 'hidden sm:block' : ''}`}
+      />
+      {logoIconSrc && (
+        <img
+          src={logoIconSrc}
+          alt={logoAlt}
+          className="h-full w-auto block sm:hidden"
+        />
+      )}
+    </Link>
+  )
+
   return (
     <header
-      className={`flex items-center justify-between px-(--inset-6) py-(--inset-4) ${className}`}
+      className={`flex items-center px-(--inset-6) py-(--inset-4) ${className}`}
       style={{
         background:   'var(--bg-navigation-bar)',
         borderBottom: 'var(--space-1) solid var(--border-surface-base)',
       }}
     >
-      {/* ── Left ── */}
-      <div className="flex items-center gap-(--inline-4)">
-        <Button
-          variant="inverse"
-          iconOnly
-          onClick={onMenuClick}
-          aria-label="Open menu"
-        >
-          <Icon icon={MenuGridIcon} size="regular" />
-        </Button>
+      {variant === 'evolution' ? (
 
-        <div className="flex items-center" style={{ height: 'var(--space-24)' }}>
-          <Link to="/" style={{ height: '100%', display: 'flex', alignItems: 'center' }}>
-            <img src={judiLogo} alt="Judi" style={{ height: '100%', width: 'auto' }} />
-          </Link>
-        </div>
+        // ── Evolution — [menu+name] [logo] [actions+bell+ai+settings] ──────────
+        <>
+          <div className="flex flex-1 items-center gap-(--inline-3)">
+            <Button variant="inverse" iconOnly onClick={onMenuClick} aria-label="Open menu">
+              <Icon icon={MenuBarsIcon} size="regular" />
+            </Button>
+            {appName && (
+              <span
+                className="text-(--text-surface-inverse)"
+                style={{
+                  fontSize:   'var(--global-header-module-title-size)',
+                  lineHeight: 'var(--global-header-module-title-line-height)',
+                  fontWeight: 'var(--global-header-module-title-weight)',
+                }}
+              >
+                {appName}
+              </span>
+            )}
+          </div>
 
-        {appName && (
-          <span
-            className="text-(--text-surface-inverse)"
-            style={{
-              fontSize:   'var(--global-header-module-title-size)',
-              lineHeight: 'var(--global-header-module-title-line-height)',
-              fontWeight: 'var(--global-header-module-title-weight)',
-            }}
-          >
-            {appName}
-          </span>
-        )}
-      </div>
+          {logo}
 
-      {/* ── Right ── */}
-      <div className="flex items-center gap-(--inline-4)">
-        {headerActions}
-        <Button
-          variant="inverse"
-          iconOnly
-          onClick={onNotificationsClick}
-          aria-label="Notifications"
-        >
-          <Icon icon={BellIcon} size="regular" />
-        </Button>
+          <div className="flex flex-1 items-center justify-end gap-(--inline-3)">
+            {headerActions}
+            <Button variant="inverse" iconOnly onClick={onNotificationsClick} aria-label="Notifications">
+              <Icon icon={BellIcon} size="regular" />
+            </Button>
+            <Button variant="inverse" iconOnly onClick={onAiClick} aria-label="AI assistant">
+              <Icon icon={MessageDotsIcon} size="regular" />
+            </Button>
+            <Button variant="inverse" iconOnly onClick={onKeyboardClick} aria-label="Keyboard shortcuts">
+              <Icon icon={SettingsIcon} size="regular" />
+            </Button>
+          </div>
+        </>
 
-        <Button
-          variant="inverse"
-          rightIcon={ChevronDownIcon}
-          onClick={onAccountClick}
-        >
-          {accountLabel}
-        </Button>
-      </div>
+      ) : (
+
+        // ── Minerva — [menu+logo+name] [actions+bell+account] ─────────────────
+        <>
+          <div className="flex flex-1 items-center gap-(--inline-4)">
+            <Button variant="inverse" iconOnly onClick={onMenuClick} aria-label="Open menu">
+              <Icon icon={MenuGridIcon} size="regular" />
+            </Button>
+            {logo}
+            {appName && (
+              <span
+                className="text-(--text-surface-inverse)"
+                style={{
+                  fontSize:   'var(--global-header-module-title-size)',
+                  lineHeight: 'var(--global-header-module-title-line-height)',
+                  fontWeight: 'var(--global-header-module-title-weight)',
+                }}
+              >
+                {appName}
+              </span>
+            )}
+          </div>
+
+          <div className="flex items-center gap-(--inline-4)">
+            {headerActions}
+            <Button variant="inverse" iconOnly onClick={onNotificationsClick} aria-label="Notifications">
+              <Icon icon={BellIcon} size="regular" />
+            </Button>
+            <Button variant="inverse" rightIcon={ChevronDownIcon} onClick={onAccountClick}>
+              {accountLabel}
+            </Button>
+          </div>
+        </>
+
+      )}
     </header>
   )
 }

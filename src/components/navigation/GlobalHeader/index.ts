@@ -1,2 +1,2 @@
-export { GlobalHeader } from './GlobalHeader'
-export type { GlobalHeaderProps } from './GlobalHeader'
+export { GlobalHeader } from './GlobalHeader.js'
+export type { GlobalHeaderProps } from './GlobalHeader.js'

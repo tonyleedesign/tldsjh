@@ -5,6 +5,7 @@ import { AddIcon, ArrowRightIcon, DeleteIcon, StarFilledIcon } from '../componen
 import { AppLayout } from '../components/layout/AppLayout'
 import { SideNavItem } from '../components/navigation/SideNav'
 import { ButtonGroup } from '../components/ui/ButtonGroup'
+import judiLogo from '../assets/judi-logo.svg'
 
 type Theme = 'minerva' | 'evolution'
 type Section = 'Typography' | 'Colors' | 'Spacing' | 'Radius' | 'Button' | 'Shell'
@@ -465,6 +466,8 @@ function DocContent() {
 
   return (
     <AppLayout
+      variant={theme}
+      logoSrc={judiLogo}
       appName="Documentation"
       headerActions={headerActions}
       breadcrumbs={[{ label: 'Home', }, { label: 'Documentation Module', href: '/' }, { label: activeSection }]}
