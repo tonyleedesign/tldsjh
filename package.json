@@ -16,7 +16,6 @@
   "files": [
     "dist",
     "src/components",
-    "src/assets",
     "src/styles/themes.css"
   ],
   "scripts": {

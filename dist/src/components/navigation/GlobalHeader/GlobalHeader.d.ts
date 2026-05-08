@@ -2,8 +2,14 @@ import { ReactNode } from 'react';
 export interface GlobalHeaderProps {
     /** Which header layout to render — defaults to "minerva" */
     variant?: 'minerva' | 'evolution';
-    /** Logo element — pass any ReactNode (img, svg, component). Omit to show no logo. */
-    logo?: ReactNode;
+    /** Full logo shown on sm+ screens */
+    logoSrc?: string;
+    /** Icon-only logo shown on mobile */
+    logoIconSrc?: string;
+    /** Alt text for the logo — defaults to "Judi" */
+    logoAlt?: string;
+    /** Where the logo links — defaults to "/" */
+    logoHref?: string;
     /** Module or app name */
     appName?: string;
     /** Called when the menu icon is clicked */
@@ -22,4 +28,4 @@ export interface GlobalHeaderProps {
     onKeyboardClick?: () => void;
     className?: string;
 }
-export declare function GlobalHeader({ variant, logo, appName, onMenuClick, onNotificationsClick, headerActions, onAccountClick, accountLabel, onAiClick, onKeyboardClick, className, }: GlobalHeaderProps): import("react/jsx-runtime").JSX.Element;
+export declare function GlobalHeader({ variant, logoSrc, logoIconSrc, logoAlt, logoHref, appName, onMenuClick, onNotificationsClick, headerActions, onAccountClick, accountLabel, onAiClick, onKeyboardClick, className, }: GlobalHeaderProps): import("react/jsx-runtime").JSX.Element;

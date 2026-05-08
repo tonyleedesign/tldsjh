@@ -486,7 +486,7 @@ function DocContent() {
 // ─── App ──────────────────────────────────────────────────────────────────────
 
 function App() {
-  
+  return <DocContent />
 }
 
 export default App

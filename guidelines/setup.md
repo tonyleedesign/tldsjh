@@ -85,7 +85,6 @@ Use this as your base for every new page. Copy it to `src/app/App.tsx`:
 
 ```tsx
 import '../styles/index.css'
-import judiLogo from '../assets/judi-logo.svg'
 import { AppLayout } from '../components/layout/AppLayout'
 import { SideNavItem } from '../components/navigation/SideNav'
 
@@ -96,7 +95,6 @@ export default function App() {
   return (
     <AppLayout
       variant="minerva"
-      logo={<img src={judiLogo} alt="Judi" className="h-full w-auto" />}
       appName="My App"
       breadcrumbs={[{ label: 'Home' }]}
       title="Dashboard"

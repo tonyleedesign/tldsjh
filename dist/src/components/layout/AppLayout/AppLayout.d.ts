@@ -3,8 +3,14 @@ import { BreadcrumbItem } from '../../navigation/Breadcrumb';
 export interface AppLayoutProps {
     /** Which header to render — defaults to "minerva" */
     variant?: 'minerva' | 'evolution';
-    /** Logo element — pass any ReactNode (img, svg, component). Omit to show no logo. */
-    logo?: ReactNode;
+    /** Full logo shown on sm+ screens */
+    logoSrc?: string;
+    /** Icon-only logo shown on mobile */
+    logoIconSrc?: string;
+    /** Alt text for the logo — defaults to "Judi" */
+    logoAlt?: string;
+    /** Where the logo links — defaults to "/" */
+    logoHref?: string;
     /** Module or app name shown next to the logo */
     appName?: string;
     /** Optional content rendered before the bell icon — available in both variants */
@@ -36,4 +42,4 @@ export interface AppLayoutProps {
     children?: ReactNode;
     className?: string;
 }
-export declare function AppLayout({ variant, logo, appName, onNotificationsClick, onAccountClick, headerActions, accountLabel, onAiClick, onKeyboardClick, breadcrumbs, title, onBackClick, secondaryContent, actions, sideNavContent, defaultSideNavOpen, children, className, }: AppLayoutProps): import("react/jsx-runtime").JSX.Element;
+export declare function AppLayout({ variant, logoSrc, logoIconSrc, logoAlt, logoHref, appName, onNotificationsClick, onAccountClick, headerActions, accountLabel, onAiClick, onKeyboardClick, breadcrumbs, title, onBackClick, secondaryContent, actions, sideNavContent, defaultSideNavOpen, children, className, }: AppLayoutProps): import("react/jsx-runtime").JSX.Element;
