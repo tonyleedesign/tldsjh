@@ -4,20 +4,7 @@ Before writing any code, complete these steps in order.
 
 ---
 
-## 1. Copy the components into your project
-
-The package does not export components for direct import. You must copy them into your local project first.
-
-Read every file inside `node_modules/@make-kits/jh-ds/src/components/` and write each one to the same relative path under `src/components/`, preserving the full folder structure. Do the same for assets:
-
-- `node_modules/@make-kits/jh-ds/src/components/` → `src/components/`
-- `node_modules/@make-kits/jh-ds/src/assets/` → `src/assets/`
-
-Do not skip files. Do not create re-export wrappers. Copy the source files exactly as they are.
-
----
-
-## 2. Add the style import to `src/styles/index.css`
+## 1. Add the style import to `src/styles/index.css`
 
 Open `src/styles/index.css` and add `@import '@make-kits/jh-ds/style.css';` as the first line:
 
@@ -31,7 +18,7 @@ It must be first — design tokens must load before Tailwind processes the compo
 
 ---
 
-## 3. Set the theme (REQUIRED)
+## 2. Set the theme (REQUIRED)
 
 There is no `index.html` in this environment. Do not use `useEffect`. Add this line at the top of `src/app/App.tsx`, outside and above the component function:
 
@@ -46,17 +33,24 @@ Two options:
 
 ---
 
-## 4. Import components using local relative paths
+## 3. Import components from the package
 
-All components are now in `src/components/`. Import from there — never from the package directly:
+All components are available from a single import:
 
 ```tsx
-import { AppLayout } from '../components/layout/AppLayout'
-import { SideNavItem } from '../components/navigation/SideNav'
-import { Button } from '../components/ui/Button'
-import { ButtonGroup } from '../components/ui/ButtonGroup'
-import { Icon, AddIcon, SearchIcon, DeleteIcon, EditIcon } from '../components/ui/Icon'
-import { Spinner } from '../components/ui/Spinner'
+import {
+  AppLayout,
+  SideNavItem,
+  Button,
+  ButtonGroup,
+  Icon,
+  Spinner,
+  AddIcon,
+  SearchIcon,
+  DeleteIcon,
+  EditIcon,
+  // ...any other components or icons you need
+} from '@make-kits/jh-ds'
 ```
 
 Only import the components you actually use. See `components.md` for the full list.
@@ -68,8 +62,8 @@ Only import the components you actually use. See `components.md` for the full li
 Every page must use AppLayout. Use this as the base for `src/app/App.tsx`:
 
 ```tsx
-import { AppLayout } from '../components/layout/AppLayout'
-import { SideNavItem } from '../components/navigation/SideNav'
+import '@make-kits/jh-ds/style.css'
+import { AppLayout, SideNavItem } from '@make-kits/jh-ds'
 
 document.documentElement.setAttribute("data-theme", "minerva");
 
@@ -98,9 +92,7 @@ export default function App() {
 ## Adding page actions
 
 ```tsx
-import { Button } from '../components/ui/Button'
-import { ButtonGroup } from '../components/ui/ButtonGroup'
-import { AddIcon } from '../components/ui/Icon'
+import { Button, ButtonGroup, AddIcon } from '@make-kits/jh-ds'
 
 <AppLayout
   ...
