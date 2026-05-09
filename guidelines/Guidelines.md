@@ -2,14 +2,14 @@
 
 ## REQUIRED: Theme attribute
 
-Set `data-theme` on `<html>` in `index.html` before anything renders. Without this, all CSS variables are undefined and components will have no styling:
+There is no `index.html` in this environment. Add this line at the top of `src/app/App.tsx`, outside and above the component function. Without it, all CSS variables are undefined and components will have no styling:
 
-```html
-<html data-theme="minerva">
+```tsx
+document.documentElement.setAttribute("data-theme", "minerva");
 ```
 
-- `data-theme="minerva"` — 16px base, Source Sans 3
-- `data-theme="evolution"` — 14px base, Inter
+- `'minerva'` — 16px base, Source Sans 3
+- `'evolution'` — 14px base, Inter
 
 ---
 
@@ -18,17 +18,18 @@ Set `data-theme` on `<html>` in `index.html` before anything renders. Without th
 Import `@make-kits/jh-ds/style.css` once in your global CSS entry point (`src/styles/index.css`):
 
 ```css
-@import '@make-kits/jh-ds/style.css';
+@import "@make-kits/jh-ds/style.css";
 ```
 
-In component files, only import the components you actually use — always via relative paths:
+Components must be copied locally first (see `setup.md` step 1). Then import from `src/components/` using relative paths — never from the package directly:
 
 ```tsx
 import { AppLayout } from '../components/layout/AppLayout'
 import { SideNavItem } from '../components/navigation/SideNav'
 import { Button } from '../components/ui/Button'
 import { ButtonGroup } from '../components/ui/ButtonGroup'
-import { AddIcon } from '../components/ui/Icon'
+import { Icon, AddIcon, SearchIcon, DeleteIcon } from '../components/ui/Icon'
+import { Spinner } from '../components/ui/Spinner'
 ```
 
 ---
@@ -42,6 +43,16 @@ import { AddIcon } from '../components/ui/Icon'
 - Never write custom CSS classes
 - Typography always uses inline styles, never Tailwind classes
 - Keep components small — put each in its own file
+
+---
+
+## Building from designs
+
+When a designer shares a screenshot or design to recreate:
+
+1. **Use existing components first** — refer to `components.md` for the full list of available components and their usage. Always use a kit component if it covers the UI before writing anything custom.
+2. **If a component doesn't exist in the kit, build it** — create a new file in its own file following the same patterns as existing components. Never inline a one-off component inside a page file.
+3. **Custom components must use the token system** — same rules apply as everywhere else: spacing tokens for padding/gap, semantic color tokens for backgrounds/text/borders, inline styles for typography. Never hardcode values.
 
 ---
 
@@ -60,14 +71,15 @@ Pass `variant` to AppLayout to match the `data-theme` set on `<html>`:
 
 Always use semantic spacing tokens as Tailwind classes using this syntax: `p-(--inset-6)`, `gap-(--inline-3)`.
 
-| Intent | Tokens | Use for |
-|--------|--------|---------|
-| Inset | `--inset-1` → `--inset-7` | Padding inside containers |
-| Stack | `--stack-1` → `--stack-5` | Vertical gap between elements |
+| Intent | Tokens                      | Use for                         |
+| ------ | --------------------------- | ------------------------------- |
+| Inset  | `--inset-1` → `--inset-7`   | Padding inside containers       |
+| Stack  | `--stack-1` → `--stack-5`   | Vertical gap between elements   |
 | Inline | `--inline-1` → `--inline-5` | Horizontal gap between elements |
-| Layout | `--layout-1` → `--layout-4` | Page-level structure |
+| Layout | `--layout-1` → `--layout-4` | Page-level structure            |
 
 **Decision tree**
+
 - Padding inside a component? → `--inset-*`
 - Gap between items in a row? → `--inline-*`
 - Gap between items in a column? → `--stack-*`
@@ -100,6 +112,7 @@ Always use inline styles — never Tailwind classes:
 ```
 
 **Decision tree**
+
 - Page title? → `--heading-xl`
 - Section heading? → `--heading-lg` or `--heading-md`
 - Body copy? → `--body-md` (default), `--body-sm` (dense), `--body-lg` (comfortable)
@@ -120,6 +133,7 @@ Always use semantic color tokens as Tailwind classes:
 ```
 
 **Decision tree**
+
 - Default page or card background? → `--bg-surface-base`
 - Page content area? → `--bg-surface-subtle`
 - Dark/inverse surface? → `--bg-surface-inverse`
@@ -133,10 +147,10 @@ Always use semantic color tokens as Tailwind classes:
 ## Border Radius
 
 ```tsx
-className="rounded-(--radius-sm)"    // 4px — inputs, nav items, badges
-className="rounded-(--radius-md)"    // 8px — cards, modals, dropdowns
-className="rounded-(--radius-lg)"    // 12px — large surfaces
-className="rounded-(--radius-full)"  // pill shapes
+className = "rounded-(--radius-sm)"; // 4px — inputs, nav items, badges
+className = "rounded-(--radius-md)"; // 8px — cards, modals, dropdowns
+className = "rounded-(--radius-lg)"; // 12px — large surfaces
+className = "rounded-(--radius-full)"; // pill shapes
 ```
 
 ---
@@ -155,7 +169,7 @@ import { AddIcon } from '../components/ui/Icon'
 <AppLayout
   variant="minerva"
   appName="Module Name"
-  breadcrumbs={[{ label: 'Home' }, { label: 'Page Name' }]}
+  breadcrumbs={[{ label: "Home" }, { label: "Page Name" }]}
   title="Page Title"
   sideNavContent={
     <>
@@ -166,12 +180,14 @@ import { AddIcon } from '../components/ui/Icon'
   actions={
     <ButtonGroup>
       <Button variant="secondary">Cancel</Button>
-      <Button variant="primary" leftIcon={AddIcon}>Add Item</Button>
+      <Button variant="primary" leftIcon={AddIcon}>
+        Add Item
+      </Button>
     </ButtonGroup>
   }
 >
   {/* page content */}
-</AppLayout>
+</AppLayout>;
 ```
 
 Use `onBackClick` to render a Back button — use this on detail or nested pages:
@@ -215,11 +231,12 @@ Wraps related buttons — primary action always rightmost:
 
 ```tsx
 import { ButtonGroup } from '../components/ui/ButtonGroup'
+import { Button } from '../components/ui/Button'
 
 <ButtonGroup>
   <Button variant="secondary">Cancel</Button>
   <Button variant="primary">Save</Button>
-</ButtonGroup>
+</ButtonGroup>;
 ```
 
 ---

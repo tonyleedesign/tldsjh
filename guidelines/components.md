@@ -2,22 +2,20 @@
 
 This kit provides a complete set of components. Always use them — never build custom components or layouts from scratch.
 
+**Setup required first:** copy components from `node_modules/@make-kits/jh-ds/src/components/` into `src/components/` before writing any code. See `setup.md` step 1. All import paths below are relative from `src/app/`.
+
+---
+
 ## Available components
 
-All components are imported from the kit package:
-
-```tsx
-import { ComponentName } from "../components/...";
-```
-
-| Component                | Import path                        |
-| ------------------------ | ---------------------------------- |
-| `AppLayout`              | `../components/layout/AppLayout`   |
-| `Button`                 | `../components/ui/Button`          |
-| `ButtonGroup`            | `../components/ui/ButtonGroup`     |
-| `Icon` + all icons       | `../components/ui/Icon`            |
-| `Spinner`                | `../components/ui/Spinner`         |
-| `SideNav`, `SideNavItem` | `../components/navigation/SideNav` |
+| Component                | Import path                              |
+| ------------------------ | ---------------------------------------- |
+| `AppLayout`              | `../components/layout/AppLayout`         |
+| `SideNav`, `SideNavItem` | `../components/navigation/SideNav`       |
+| `Button`                 | `../components/ui/Button`                |
+| `ButtonGroup`            | `../components/ui/ButtonGroup`           |
+| `Icon` + all icons       | `../components/ui/Icon`                  |
+| `Spinner`                | `../components/ui/Spinner`               |
 
 ---
 
@@ -26,8 +24,8 @@ import { ComponentName } from "../components/...";
 Every page must start with AppLayout. No exceptions — not for simple pages, not for single components. Never build a custom layout or render content outside of AppLayout.
 
 ```tsx
-import { AppLayout } from "../components/layout/AppLayout";
-import { SideNavItem } from "../components/navigation/SideNav";
+import { AppLayout } from '../components/layout/AppLayout'
+import { SideNavItem } from '../components/navigation/SideNav'
 
 export default function MyPage() {
   return (
@@ -52,6 +50,8 @@ export default function MyPage() {
 ### With page actions
 
 ```tsx
+import { AppLayout } from '../components/layout/AppLayout'
+import { SideNavItem } from '../components/navigation/SideNav'
 import { Button } from '../components/ui/Button'
 import { ButtonGroup } from '../components/ui/ButtonGroup'
 import { AddIcon } from '../components/ui/Icon'
@@ -83,8 +83,8 @@ import { AddIcon } from '../components/ui/Icon'
 ## Button
 
 ```tsx
-import { Button } from "../components/ui/Button";
-import { AddIcon, DeleteIcon, ArrowRightIcon } from "../components/ui/Icon";
+import { Button } from '../components/ui/Button'
+import { AddIcon, DeleteIcon, ArrowRightIcon } from '../components/ui/Icon'
 ```
 
 | Variant     | Use                                |
@@ -117,12 +117,13 @@ import { AddIcon, DeleteIcon, ArrowRightIcon } from "../components/ui/Icon";
 Always wrap related buttons in ButtonGroup. Primary action goes rightmost.
 
 ```tsx
-import { ButtonGroup } from "../components/ui/ButtonGroup";
+import { ButtonGroup } from '../components/ui/ButtonGroup'
+import { Button } from '../components/ui/Button'
 
 <ButtonGroup>
   <Button variant="secondary">Cancel</Button>
   <Button variant="primary">Save</Button>
-</ButtonGroup>;
+</ButtonGroup>
 ```
 
 ---
@@ -183,7 +184,7 @@ import { SideNavItem } from '../components/navigation/SideNav'
 Used automatically inside Button when `loading` is set. Only use standalone for page or section loading states.
 
 ```tsx
-import { Spinner } from "../components/ui/Spinner";
+import { Spinner } from '../components/ui/Spinner'
 
-<Spinner />;
+<Spinner />
 ```
