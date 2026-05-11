@@ -24,49 +24,46 @@ const minervaSpacing = {
   'space-40': spacing['space-40'],
 
   // ─── Inset — padding inside containers ───────────────────────────────────
-  'inset-1': spacing['space-4'],   //  4px — badges, tight chips
-  'inset-2': spacing['space-6'],   //  6px — dense table cells
-  'inset-3': spacing['space-8'],   //  8px — compact inputs, nav items
-  'inset-4': spacing['space-10'],  // 10px — default table cells, list items
-  'inset-5': spacing['space-12'],  // 12px — comfortable inputs
-  'inset-6': spacing['space-16'],  // 16px — cards, panels
-  'inset-7': spacing['space-24'],  // 24px — dialogs, page sections
+  'inset-1': spacing['space-4'],   
+  'inset-2': spacing['space-6'],   
+  'inset-3': spacing['space-8'],   
+  'inset-4': spacing['space-10'],  
+  'inset-5': spacing['space-12'],  
+  'inset-6': spacing['space-16'],  
+  'inset-7': spacing['space-24'],  
 
   // ─── Stack — vertical gap between elements ────────────────────────────────
-  'stack-1': spacing['space-4'],   //  4px — icon + label, tightly related
-  'stack-2': spacing['space-8'],   //  8px — between related items
-  'stack-3': spacing['space-12'],  // 12px — between grouped items
-  'stack-4': spacing['space-16'],  // 16px — between distinct groups
-  'stack-5': spacing['space-24'],  // 24px — between major sections
+  'stack-1': spacing['space-4'],   
+  'stack-2': spacing['space-8'],   
+  'stack-3': spacing['space-12'],  
+  'stack-4': spacing['space-16'],  
+  'stack-5': spacing['space-24'],  
 
   // ─── Inline — horizontal gap between elements ─────────────────────────────
-  'inline-1': spacing['space-4'],  //  4px — icon + label, tight pairs
-  'inline-2': spacing['space-8'],  //  8px — button groups, tags
-  'inline-3': spacing['space-12'], // 12px — form fields side by side
-  'inline-4': spacing['space-16'], // 16px — card grid columns
-  'inline-5': spacing['space-24'], // 24px — wide column gaps
+  'inline-1': spacing['space-4'],  
+  'inline-2': spacing['space-8'],  
+  'inline-3': spacing['space-12'], 
+  'inline-4': spacing['space-16'], 
+  'inline-5': spacing['space-24'], 
 
   // ─── Layout — page-level structure ───────────────────────────────────────
-  'layout-1': spacing['space-16'], // 16px — TBC
-  'layout-2': spacing['space-24'], // 24px
-  'layout-3': spacing['space-32'], // 32px
-  'layout-4': spacing['space-40'], // 40px
+  'layout-1': spacing['space-16'], 
+  'layout-2': spacing['space-24'], 
+  'layout-3': spacing['space-32'], 
+  'layout-4': spacing['space-40'], 
 
   // ─── Component ────────────────────────────────────────────────────────────
   'sidenav-width-expanded': '256px',
 
 } as const
 
-// ─── Evolution (placeholder — values to be confirmed in Figma) ───────────────
+// ─── Evolution ───────────────
 
 const evolutionSpacing = {
   ...minervaSpacing,
 
   // ─── Inset ────────────────────────────────────────────────────────────────
   // TODO: fill in tightened Evolution values
-  // 'inset-1': spacing['space-2'],
-  // 'inset-2': spacing['space-4'],
-  // ...
 
   // ─── Stack ────────────────────────────────────────────────────────────────
   // TODO: fill in tightened Evolution values
