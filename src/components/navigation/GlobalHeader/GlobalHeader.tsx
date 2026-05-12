@@ -52,7 +52,7 @@ export interface GlobalHeaderProps {
 
 export function GlobalHeader({
   variant          = 'minerva',
-  logoSrc,
+  logoSrc          = judiLogoSrc,
   logoIconSrc,
   logoAlt          = 'Judi',
   logoHref         = '/',
@@ -70,7 +70,7 @@ export function GlobalHeader({
   const logo = (
     <a href={logoHref} className="flex items-center h-(--space-24)">
       <img
-        src={logoSrc ?? judiLogoSrc}
+        src={logoSrc}
         alt={logoAlt}
         className={`h-full w-auto ${logoIconSrc ? 'hidden sm:block' : ''}`}
       />

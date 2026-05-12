@@ -13,7 +13,7 @@ export interface AppLayoutProps {
   variant?: 'minerva' | 'evolution'
 
   // ── Shared header props ──────────────────────────────────────────────────────
-  /** Full logo shown on sm+ screens */
+  /** Full logo shown on sm+ screens — defaults to the Judi logo */
   logoSrc?: string
   /** Icon-only logo shown on mobile */
   logoIconSrc?: string
@@ -42,7 +42,7 @@ export interface AppLayoutProps {
 
   // ── ActionBar ───────────────────────────────────────────────────────────────
   /** Breadcrumb trail */
-  breadcrumbs: BreadcrumbItem[]
+  breadcrumbs?: BreadcrumbItem[]
   /** Page / module title */
   title?: string
   /** When provided, renders a ← Back button to the left of the title */
@@ -53,7 +53,7 @@ export interface AppLayoutProps {
   actions?: ReactNode
 
   // ── SideNav ─────────────────────────────────────────────────────────────────
-  /** Nav items rendered inside the SideNav when expanded */
+  /** Nav items rendered inside the SideNav. Omit this prop entirely if the design has no side navigation — the SideNav will not render at all. */
   sideNavContent?: ReactNode
   /** Initial open state of the SideNav — defaults to true */
   defaultSideNavOpen?: boolean
@@ -124,14 +124,14 @@ export function AppLayout({
     />
   )
 
-  const sideNav = (
+  const sideNav = sideNavContent ? (
     <SideNav
       isOpen={sideNavOpen}
       onToggle={() => setSideNavOpen(prev => !prev)}
     >
       {sideNavContent}
     </SideNav>
-  )
+  ) : null
 
   return (
     <div className={`flex flex-col h-screen overflow-hidden bg-(--bg-surface-base) ${className}`}>
@@ -145,7 +145,7 @@ export function AppLayout({
             {sideNavOpen && sideNav}
             <div className="flex flex-col flex-1 overflow-hidden">
               {actionBar}
-              <main className="flex-1 overflow-auto bg-(--bg-surface-subtle) p-(--layout-4)">
+              <main aria-label="Page content" className="flex-1 overflow-auto bg-(--bg-surface-subtle) p-(--layout-4)">
                 {children}
               </main>
             </div>
@@ -162,7 +162,7 @@ export function AppLayout({
           </div>
           <div className="flex flex-1 overflow-hidden">
             {sideNav}
-            <main className="flex-1 overflow-auto bg-(--bg-surface-subtle) p-(--layout-4)">
+            <main aria-label="Page content" className="flex-1 overflow-auto bg-(--bg-surface-subtle) p-(--layout-4)">
               {children}
             </main>
           </div>
