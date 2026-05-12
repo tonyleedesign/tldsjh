@@ -2,14 +2,22 @@ import { useState } from 'react'
 import { Button } from '../components/ui/Button'
 import { AddIcon, ArrowRightIcon, DeleteIcon, StarFilledIcon } from '../components/ui/Icon'
 import { AppLayout } from '../components/layout/AppLayout'
-import { SideNavItem } from '../components/navigation/SideNav'
+import { SideNavItem, SideNavGroup } from '../components/navigation/SideNav'
 import { ButtonGroup } from '../components/ui/ButtonGroup'
 import judiLogo from '../assets/judi-logo.svg'
+import { Lozenge } from '../components/ui/Lozenge'
 
 type Theme = 'minerva' | 'evolution'
 type Section = 'Typography' | 'Colors' | 'Spacing' | 'Radius' | 'Button' | 'Shell'
 
 const SECTIONS: Section[] = ['Typography', 'Colors', 'Spacing', 'Radius', 'Button', 'Shell']
+
+const PLACEHOLDER_ITEMS = [
+  'Dashboard', 'Analytics', 'Reports', 'Transactions', 'Payments',
+  'Customers', 'Invoices', 'Products', 'Orders', 'Inventory',
+  'Settings', 'Team', 'Billing', 'Integrations', 'Audit Log',
+  'Notifications', 'Support',
+]
 
 // ─── Typography ───────────────────────────────────────────────────────────────
 
@@ -451,15 +459,25 @@ function DocContent() {
   )
 
   const sideNavContent = (
-    <div className="flex flex-col gap-(--space-4)">
-      {SECTIONS.map((section) => (
-        <SideNavItem
-          key={section}
-          label={section}
-          onClick={() => setActiveSection(section)}
-          active={activeSection === section}
-        />
-      ))}
+    <div className="flex flex-col gap-(--stack-4)">
+      <div className="flex flex-col gap-(--space-4)">
+        <SideNavGroup label="Queues" />
+        {SECTIONS.map((section) => (
+          <SideNavItem
+            key={section}
+            label={section}
+            onClick={() => setActiveSection(section)}
+            active={activeSection === section}
+            lozenge={<Lozenge count={0} />}
+          />
+        ))}
+      </div>
+      <div className="flex flex-col gap-(--space-4)">
+        <SideNavGroup label="Admin" />
+        {PLACEHOLDER_ITEMS.map((item) => (
+          <SideNavItem key={item} label={item} lozenge={<Lozenge count={0} />} />
+        ))}
+      </div>
     </div>
   )
 
